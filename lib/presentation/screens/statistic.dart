@@ -146,7 +146,7 @@ class _StatisticsState extends State<Statistics>
                             color: indexColor == index
                                 ? Colors.white
                                 : Colors.black,
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

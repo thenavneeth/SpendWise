@@ -146,7 +146,7 @@ Stack _head() {
             width: double.infinity,
             height: 240,
             decoration: const BoxDecoration(
-              color: Color(0xff368983),
+              color: Color.fromARGB(255, 219, 107, 15),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
