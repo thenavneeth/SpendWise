@@ -65,7 +65,7 @@ class CategoryScreenState extends State<CategoryScreen> {
             padding: EdgeInsets.all(10.0),
             child: Text(
               'Income',
-              style: TextStyle(fontSize: 17, color: Colors.green),
+              style: TextStyle(fontSize: 21, color: Color.fromARGB(255, 20, 96, 23)),
             ),
           )),
           SliverList(
@@ -94,7 +94,7 @@ class CategoryScreenState extends State<CategoryScreen> {
               child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Text('Expense',
-                style: TextStyle(fontSize: 17, color: Colors.red)),
+                style: TextStyle(fontSize: 21, color: Color.fromARGB(255, 20, 96, 23))),
           )),
           SliverList(
             delegate: SliverChildBuilderDelegate(

@@ -146,7 +146,7 @@ Stack _head() {
             width: double.infinity,
             height: 240,
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 219, 107, 15),
+              color: Color.fromARGB(255, 40, 63, 135),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -188,13 +188,13 @@ Stack _head() {
             decoration: BoxDecoration(
               boxShadow: const [
                 BoxShadow(
-                  color: Color.fromRGBO(47, 125, 121, 0.3),
+                  color: Color.fromRGBO(0, 18, 17, 0.298),
                   offset: Offset(0, 6),
                   blurRadius: 12,
                   spreadRadius: 6,
                 ),
               ],
-              color: const Color(0xff368983),
+              color: const Color.fromARGB(255, 75, 95, 220),
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(

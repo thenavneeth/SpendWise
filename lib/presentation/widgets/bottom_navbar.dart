@@ -30,7 +30,7 @@ class _BottomState extends State<Bottom> {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const AddScreen()));
         },
-        backgroundColor: const Color(0xff368983),
+        backgroundColor: const Color.fromARGB(255, 64, 79, 181),
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -60,7 +60,7 @@ class _BottomState extends State<Bottom> {
                     Icons.home,
                     size: 30,
                     color:
-                        indexColor == 0 ? const Color(0xff368983) : Colors.grey,
+                        indexColor == 0 ? const Color.fromARGB(255, 64, 79, 181) : Colors.grey,
                   ),
                 )),
             GestureDetector(
@@ -83,7 +83,7 @@ class _BottomState extends State<Bottom> {
                     Icons.bar_chart_outlined,
                     size: 30,
                     color:
-                        indexColor == 1 ? const Color(0xff368983) : Colors.grey,
+                        indexColor == 1 ? const Color.fromARGB(255, 64, 79, 181) : Colors.grey,
                   ),
                 )),
             const SizedBox(
@@ -109,7 +109,7 @@ class _BottomState extends State<Bottom> {
                     Icons.category_outlined,
                     size: 30,
                     color:
-                        indexColor == 2 ? const Color(0xff368983) : Colors.grey,
+                        indexColor == 2 ? const Color.fromARGB(255, 64, 79, 181) : Colors.grey,
                   ),
                 )),
             GestureDetector(
@@ -129,7 +129,7 @@ class _BottomState extends State<Bottom> {
                     Icons.search_outlined,
                     size: 30,
                     color:
-                        indexColor == 3 ? const Color(0xff368983) : Colors.grey,
+                        indexColor == 3 ? const Color.fromARGB(255, 64, 79, 181) : Colors.grey,
                   ),
                 )),
           ]),

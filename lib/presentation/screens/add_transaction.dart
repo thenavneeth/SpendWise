@@ -206,7 +206,7 @@ class _AddScreenState extends State<AddScreen> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: const Color(0xff368983)),
+            color: const Color.fromARGB(255, 64, 79, 181)),
         height: 50,
         width: 140,
         child: const Text(
@@ -299,7 +299,7 @@ class _AddScreenState extends State<AddScreen> {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 width: 2,
-                color: const Color(0xff368983),
+                color: const Color.fromARGB(255, 64, 79, 181),
               )),
           child: DropdownButton<String>(
             value: selectedTypeItem,
@@ -389,7 +389,7 @@ class _AddScreenState extends State<AddScreen> {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             width: 2,
-            color: const Color(0xff368983),
+            color: const Color.fromARGB(255, 64, 79, 181),
           ),
         ),
         child: DropdownButton<CategoryModel>(
@@ -452,7 +452,7 @@ class _AddScreenState extends State<AddScreen> {
           width: double.infinity,
           height: 240,
           decoration: const BoxDecoration(
-              color: Color(0xff368983),
+              color: Color.fromARGB(255, 64, 79, 181),
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20))),
