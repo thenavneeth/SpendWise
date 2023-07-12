@@ -185,7 +185,7 @@ Stack _head(String userName) {
                 Padding(
                     padding: const EdgeInsets.only(top: 40, left: 30),
                     child: Text(
-                      "            Hello " + userName ?? "Dashboard",
+                      " Hello " + userName ?? "Dashboard",
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 22,

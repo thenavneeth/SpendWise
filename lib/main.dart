@@ -1,5 +1,6 @@
 import 'package:expanse_management/presentation/screens/add_transaction.dart';
 import 'package:expanse_management/presentation/screens/budget_plan.dart';
+import 'package:expanse_management/presentation/screens/home.dart';
 import 'package:expanse_management/presentation/screens/listreceipt.dart';
 import 'package:expanse_management/presentation/screens/login.dart';
 import 'package:expanse_management/presentation/screens/signup.dart';
