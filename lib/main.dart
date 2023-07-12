@@ -1,6 +1,12 @@
+import 'package:expanse_management/presentation/screens/add_transaction.dart';
+import 'package:expanse_management/presentation/screens/budget_plan.dart';
+import 'package:expanse_management/presentation/screens/listreceipt.dart';
+import 'package:expanse_management/presentation/screens/login.dart';
+import 'package:expanse_management/presentation/screens/signup.dart';
 import 'package:expanse_management/presentation/widgets/bottom_navbar.dart';
 import 'package:expanse_management/domain/models/category_model.dart';
 import 'package:expanse_management/domain/models/transaction_model.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -11,8 +17,11 @@ import 'package:hive_flutter/adapters.dart';
 //   await Hive.deleteFromDisk();
 // }
 
+
+
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   // await clearData();
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionAdapter());
@@ -29,9 +38,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Bottom(),
-    );
+      home: SignUp(),
+    );  
   }
 }

@@ -85,7 +85,7 @@ class _CircularChartState extends State<CircularChart> {
         width: double.infinity,
         height: 130,
         child: Opacity(
-            opacity: 0.2, child: Image.asset('images/ChartIllustrator.png')),
+            opacity: 0.2, child: Image.asset('assets/images/ChartIllustrator.png')),
       );
     } else if (widget.title == 'Expense' && expenseData.isEmpty) {
       return Padding(
@@ -94,7 +94,7 @@ class _CircularChartState extends State<CircularChart> {
           width: double.infinity,
           height: 130,
           child: Opacity(
-              opacity: 0.2, child: Image.asset('images/ChartIllustrator.png')),
+              opacity: 0.2, child: Image.asset('assets/images/ChartIllustrator.png')),
         ),
       );
     }

@@ -73,7 +73,7 @@ class CategoryScreenState extends State<CategoryScreen> {
               (context, index) {
                 final category = incomeCategories[index];
                 return ListTile(
-                  leading: Image.asset('images/${category.categoryImage}',
+                  leading: Image.asset('assets/images/${category.categoryImage}',
                       height: 40),
                   title: Text(category.title),
                   onTap: () {
@@ -101,7 +101,7 @@ class CategoryScreenState extends State<CategoryScreen> {
               (context, index) {
                 final category = expenseCategories[index];
                 return ListTile(
-                  leading: Image.asset('images/${category.categoryImage}',
+                  leading: Image.asset('assets/images/${category.categoryImage}',
                       height: 40),
                   title: Text(category.title),
                   onTap: () {
@@ -166,7 +166,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.asset(
-                'images/${transaction.category.categoryImage}',
+                'assets/images/${transaction.category.categoryImage}',
                 height: 40,
               ),
             ),

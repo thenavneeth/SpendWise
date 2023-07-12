@@ -1,28 +1,22 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:expanse_management/Constants/color.dart';
 import 'package:expanse_management/Constants/default_categories.dart';
 import 'package:expanse_management/Constants/limits.dart';
 import 'package:expanse_management/data/utilty.dart';
 import 'package:expanse_management/domain/models/category_model.dart';
 import 'package:expanse_management/domain/models/transaction_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:image_picker/image_picker.dart';
 
 // import '../Constants/categories.dart';
 
-class AddScreen extends StatefulWidget {
-  const AddScreen({super.key});
+class Budgetplan extends StatefulWidget {
+  const Budgetplan({super.key});
 
   @override
-  State<AddScreen> createState() => _AddScreenState();
+  State<Budgetplan> createState() => _BudgetplanState();
 }
 
-class _AddScreenState extends State<AddScreen> {
+class _BudgetplanState extends State<Budgetplan> {
   List<CategoryModel> incomeCategories = defaultIncomeCategories;
   List<CategoryModel> expenseCategories = defaultExpenseCategories;
 
@@ -39,10 +33,6 @@ class _AddScreenState extends State<AddScreen> {
   FocusNode explainFocus = FocusNode();
   final TextEditingController amountC = TextEditingController();
   FocusNode amountFocus = FocusNode();
-
-  //initialized the image variable for picking reciept image
-  XFile _image = XFile('');
-  String _imageUrl = '';
 
   bool isAmountValid = true;
 
@@ -105,25 +95,29 @@ class _AddScreenState extends State<AddScreen> {
       width: 360,
       child: Column(children: [
         const SizedBox(
-          height: 35,
-        ),
-        typeField(),
-        const SizedBox(
-          height: 35,
+          height: 30,
         ),
         noteField(),
         const SizedBox(
-          height: 35,
+          height: 30,
         ),
-        amountField(),
+        timeField1(),
         const SizedBox(
           height: 35,
+        ),
+        timeField2(),
+        const SizedBox(
+          height: 30,
+        ),
+        typeField(),
+        const SizedBox(
+          height: 30,
         ),
         categoryField(),
         const SizedBox(
-          height: 35,
+          height: 30,
         ),
-        timeField(),
+        amountField(),
         // const Spacer(),
         const SizedBox(
           height: 35,
@@ -231,7 +225,7 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 
-  Padding timeField() {
+  Padding timeField1() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
@@ -254,7 +248,38 @@ class _AddScreenState extends State<AddScreen> {
             });
           },
           child: Text(
-            'Date : ${date.day}/${date.month}/${date.year}',
+            'Start Date : ${date.day}/${date.month}/${date.year}',
+            style: const TextStyle(fontSize: 15, color: Colors.black),
+          ),
+        ),
+      ),
+    );
+  }
+
+    Padding timeField2() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        alignment: Alignment.bottomLeft,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2, color: const Color(0xffC5C5C5))),
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () async {
+            DateTime? newDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2020, 1, 1),
+                lastDate: DateTime(2030));
+            if (newDate == null) return;
+            setState(() {
+              date = newDate;
+            });
+          },
+          child: Text(
+            'End Date : ${date.day}/${date.month}/${date.year}',
             style: const TextStyle(fontSize: 15, color: Colors.black),
           ),
         ),
@@ -274,7 +299,7 @@ class _AddScreenState extends State<AddScreen> {
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-          labelText: 'Amount',
+          labelText: 'Enter the Expected Amount',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade800),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -299,7 +324,7 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 
-  Padding typeField() {
+Padding typeField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
@@ -371,7 +396,7 @@ class _AddScreenState extends State<AddScreen> {
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-          labelText: 'Notes',
+          labelText: 'Enter Your Budget',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade800),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -486,21 +511,12 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                   const Text(
-                    "Add Transaction",
+                    "Budget Planner                     ",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      pickImage();
-                    },
-                    icon: const Icon(
-                      Icons.attach_file_outlined,
-                      color: Colors.white,
-                    ),
-                  )
                 ],
               ),
             )
@@ -508,37 +524,5 @@ class _AddScreenState extends State<AddScreen> {
         )
       ],
     );
-  }
-
-  Future<void> pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    try {
-      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        setState(() {
-          _image = image;
-        });
-        log(_image.path);
-
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user == null) {
-          log('No user is currently signed in');
-          return;
-        }
-
-        // Upload the selected image to Firebase Storage
-        Reference storageReference =
-            FirebaseStorage.instance.ref().child('reciept/}');
-        UploadTask uploadTask = storageReference.putFile(File(_image.path));
-        TaskSnapshot snapshot = await uploadTask;
-        String imageUrl = await snapshot.ref.getDownloadURL();
-        log('Image uploaded to Firebase Storage: $imageUrl');
-        setState(() {
-          _imageUrl = imageUrl;
-        });
-      }
-    } catch (e) {
-      log('Image picking failed: $e');
-    }
   }
 }

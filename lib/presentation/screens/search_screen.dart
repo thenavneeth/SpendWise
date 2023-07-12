@@ -73,7 +73,7 @@ class SearchScreenState extends State<SearchScreen> {
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: Image.asset(
-                      'images/${transaction.category.categoryImage}',
+                      'assets/images/${transaction.category.categoryImage}',
                       height: 40,
                     ),
                   ),

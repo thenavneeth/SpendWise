@@ -1,4 +1,5 @@
 import 'package:expanse_management/presentation/screens/add_transaction.dart';
+import 'package:expanse_management/presentation/screens/budget_plan.dart';
 import 'package:expanse_management/presentation/screens/category_screen.dart';
 import 'package:expanse_management/presentation/screens/home.dart';
 import 'package:expanse_management/presentation/screens/search_screen.dart';
@@ -19,7 +20,8 @@ class _BottomState extends State<Bottom> {
     const Home(),
     const Statistics(),
     const CategoryScreen(),
-    const SearchScreen()
+    const SearchScreen(),
+    const Budgetplan(),
   ];
 
   @override
@@ -130,6 +132,29 @@ class _BottomState extends State<Bottom> {
                     size: 30,
                     color:
                         indexColor == 3 ? const Color.fromARGB(255, 64, 79, 181) : Colors.grey,
+                  ),
+                )),
+                 GestureDetector(
+                onTap: () {
+                  setState(() {
+                    indexColor = 4;
+                  });
+                },
+                child: Container(
+                  height: 40,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    // color: indexColor == index
+                    //     ? const Color.fromARGB(255, 47, 125, 121)
+                    //     : Colors.white,
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.attach_money_sharp,
+                    size: 30,
+                    color:
+                        indexColor == 0 ? const Color.fromARGB(255, 64, 79, 181) : Colors.grey,
                   ),
                 )),
           ]),

@@ -414,7 +414,7 @@ class _StatisticsState extends State<Statistics>
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Image.asset(
-                    'images/${currListTransaction[index].category.categoryImage}',
+                    'assets/images/${currListTransaction[index].category.categoryImage}',
                     height: 40),
               ),
               title: Text(

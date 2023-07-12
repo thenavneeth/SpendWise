@@ -1,8 +1,10 @@
 import 'package:expanse_management/Constants/days.dart';
 import 'package:expanse_management/data/utilty.dart';
 import 'package:expanse_management/domain/models/transaction_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,13 +19,20 @@ class _HomeState extends State<Home> {
   // late int totalIn;
   // late int totalEx;
   // late int total;
+  String userName = "";
   @override
   void initState() {
     super.initState();
   }
 
+  void getName() async {
+    SharedPreferences sharedPref = await SharedPreferences.getInstance();
+    userName = await sharedPref.getString('userName').toString();
+  }
+
   @override
   Widget build(BuildContext context) {
+    getName();
     return Scaffold(
       body: SafeArea(
         child: ValueListenableBuilder(
@@ -32,7 +41,7 @@ class _HomeState extends State<Home> {
               return CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
-                    child: SizedBox(height: 340, child: _head()),
+                    child: SizedBox(height: 340, child: _head(userName)),
                   ),
                   const SliverToBoxAdapter(
                     child: Padding(
@@ -108,7 +117,7 @@ class _HomeState extends State<Home> {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: Image.asset(
-            'images/${transactionHistory.category.categoryImage}',
+            'assets/images/${transactionHistory.category.categoryImage}',
             height: 40),
       ),
       title: Text(
@@ -137,7 +146,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-Stack _head() {
+Stack _head(String userName) {
   return Stack(
     children: [
       Column(
@@ -146,7 +155,7 @@ Stack _head() {
             width: double.infinity,
             height: 240,
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 40, 63, 135),
+              color: Color.fromARGB(255, 26, 50, 122),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -154,21 +163,30 @@ Stack _head() {
             ),
             child: Stack(
               children: [
-                Positioned(
-                    top: 30,
-                    right: 30,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                      ),
-                    )),
-                const Padding(
-                    padding: EdgeInsets.only(top: 40, left: 30),
+                // Positioned(
+                //     top: 30,
+                //     right: 30,
+                //     child: IconButton(
+                //       onPressed: () async {
+                //         try {
+                //           await FirebaseAuth.instance.signOut();
+                          
+                //           // Handle successful sign-out
+                //         } catch (e) {
+                //           print(e.toString());
+                //           // Handle sign-out error
+                //         }
+                //       },
+                //       icon: const Icon(
+                //         Icons.logout,
+                //         color: Colors.white,
+                //       ),
+                //     )),
+                Padding(
+                    padding: const EdgeInsets.only(top: 40, left: 30),
                     child: Text(
-                      "Dashboard",
-                      style: TextStyle(
+                      "            Hello " + userName ?? "Dashboard",
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 22,
                         color: Colors.white,
@@ -188,13 +206,13 @@ Stack _head() {
             decoration: BoxDecoration(
               boxShadow: const [
                 BoxShadow(
-                  color: Color.fromRGBO(0, 18, 17, 0.298),
+                  color: Color.fromRGBO(6, 165, 157, 0.286),
                   offset: Offset(0, 6),
                   blurRadius: 12,
                   spreadRadius: 6,
                 ),
               ],
-              color: const Color.fromARGB(255, 75, 95, 220),
+              color: Color.fromARGB(255, 22, 33, 105),
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
@@ -229,7 +247,7 @@ Stack _head() {
                         formatCurrency(totalBalance()),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white,
                         ),
                       ),
